@@ -1,1 +1,82 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hujaifa Task</title><script src="https://telegram.org/js/telegram-web-app.js"></script><style>body{background:#0f0f0f;color:#fff;font-family:sans-serif;margin:0}.c{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px}.b{background:#1e1e1e;border:1px solid #333;border-radius:20px;padding:20px;width:100%;max-width:360px}.i{width:100%;padding:13px;border-radius:10px;border:1px solid #333;background:#27272a;color:#fff;margin-top:10px;box-sizing:border-box}.bt{width:100%;padding:14px;border-radius:12px;border:0;font-weight:700;margin-top:12px;cursor:pointer}.y{background:#facc15;color:#000}.g{background:#27272a;color:#fff;border:1px solid #333}.lk{color:#facc15;font-size:12px;text-align:center;margin-top:10px;cursor:pointer}.otp{background:#102010;border:1px solid #2a6a2a;color:#8f8;padding:10px;border-radius:10px;margin-top:10px;font-size:13px;text-align:center}</style></head><body><div class="c" id="rP"><div class="b"><h2 style="text-align:center">Register</h2><input class="i" id="rN" placeholder="Full Name"><input class="i" id="rM" placeholder="10 digit Mobile" maxlength="10"><input class="i" id="rR" placeholder="Refer Code (Optional)"><input class="i" id="rP1" type="password" placeholder="Password"><input class="i" id="rP2" type="password" placeholder="Confirm Password"><button class="bt y" id="rB">Send OTP</button><div class="lk" onclick="sh('lP')">Already have account? Login</div></div></div><div class="c" id="oP" style="display:none"><div class="b"><h2 style="text-align:center">OTP Verify</h2><div id="oT" style="text-align:center;color:#888;font-size:13px"></div><div class="otp" id="oD"></div><input class="i" id="oI" placeholder="6 digit OTP" maxlength="6"><button class="bt y" id="oB">Verify OTP</button><div class="lk" onclick="sh('rP')">Back to Register</div></div></div><div class="c" id="lP" style="display:none"><div class="b"><h2 style="text-align:center">Login</h2><input class="i" id="lM" placeholder="Mobile Number"><input class="i" id="lP1" type="password" placeholder="Password"><button class="bt y" id="lB">Login</button><div class="lk" onclick="sh('rP')">New? Register</div></div></div><div id="mP" style="display:none;padding:16px"><h3 id="hi">Hi!</h3><div style="background:#1e1e1e;padding:14px;border-radius:14px;margin:10px 0;border:1px solid #333">Balance: <b id="bal" style="color:#facc15">Rs20</b><br>Code: <b id="mc" style="color:#facc15"></b> | Invites: <span id="iv">0</span></div><button class="bt y" onclick="ad()">Watch Ad +Rs2</button><button class="bt g" onclick="daily()">Daily Check-in +Rs2</button><button class="bt g" onclick="game()">Tap Game +Rs5 (1/day)</button><button class="bt g" onclick="invite()">Invite - My Refer Code</button><button class="bt g" onclick="join()">Join @HujaifaHS +Rs10</button><button class="bt y" onclick="wd()">Withdraw Min Rs100</button><div style="text-align:center;margin-top:12px"><span style="color:#ff5555;font-size:12px" onclick="logout()">Logout</span></div></div><script>let tg=null;try{tg=Telegram.WebApp;tg.ready();tg.expand()}catch(e){}let u=null,pend=null,otp='',bal=20,ld='',lg='',jo=false,inv=0;function sh(id){['rP','oP','lP','mP'].forEach(x=>document.getElementById(x).style.display='none');document.getElementById(id).style.display=id=='mP'?'block':'flex'}function vN(n){return /^[6-9][0-9]{9}$/.test(n)}function gC(m){return 'HJ'+m.slice(-4)+Math.floor(10+Math.random()*90)}try{u=JSON.parse(localStorage.getItem('hu_u')||'null')}catch(e){}if(u&&u.lg){init();sh('mP')}else if(u){sh('lP')}else{sh('rP')}document.getElementById('rB').onclick=()=>{let n=document.getElementById('rN').value.trim(),m=document.getElementById('rM').value.trim(),r=document.getElementById('rR').value.trim().toUpperCase(),p1=document.getElementById('rP1').value.trim(),p2=document.getElementById('rP2').value.trim();if(n.length<2){alert('Enter Name');return}if(!vN(m)){alert('Enter 10 digit mobile starting with 6-9');return}if(p1.length<4){alert('Password min 4 chars');return}if(p1!=p2){alert('Password not match');return}otp=(Math.floor(100000+Math.random()*900000)).toString();pend={n:n,m:m,r:r,p:p1};document.getElementById('oT').innerText='OTP sent to +91 '+m;document.getElementById('oD').innerHTML='DEMO OTP: <b style=color:#facc15;font-size:20px>'+otp+'</b>';sh('oP')};document.getElementById('oB').onclick=()=>{let e=document.getElementById('oI').value.trim();if(e!=otp){alert('Wrong OTP, correct: '+otp);return}let code=gC(pend.m);u={name:pend.n,number:pend.m,code:code,used:pend.r,pass:pend.p,lg:true};localStorage.setItem('hu_u',JSON.stringify(u));localStorage.setItem('hu_b_'+u.number,'20');let all=[];try{all=JSON.parse(localStorage.getItem('hu_all')||'[]')}catch(e){}if(pend.r){let f=all.find(x=>x.code==pend.r);if(f&&f.number!=pend.m){let rb=parseInt(localStorage.getItem('hu_b_'+f.number)||'20');rb+=10;localStorage.setItem('hu_b_'+f.number,rb);let ri=parseInt(localStorage.getItem('hu_i_'+f.number)||'0');localStorage.setItem('hu_i_'+f.number,ri+1);alert('Valid Refer Code! Referrer '+f.name+' got Rs10')}else if(f&&f.number==pend.m){alert('Cannot use own code')}else{alert('Invalid Refer Code, but registered')}}all.push(u);localStorage.setItem('hu_all',JSON.stringify(all));init();sh('mP')};document.getElementById('lB').onclick=()=>{let m=document.getElementById('lM').value.trim(),p=document.getElementById('lP1').value.trim();try{u=JSON.parse(localStorage.getItem('hu_u')||'null')}catch(e){}if(u&&u.number==m&&u.pass==p){u.lg=true;localStorage.setItem('hu_u',JSON.stringify(u));init();sh('mP')}else alert('Wrong Mobile or Password')};function init(){try{bal=parseInt(localStorage.getItem('hu_b_'+u.number)||'20')}catch(e){}try{ld=localStorage.getItem('hu_d_'+u.number)||''}catch(e){}try{lg=localStorage.getItem('hu_g_'+u.number)||''}catch(e){}try{jo=localStorage.getItem('hu_j_'+u.number)=='y'}catch(e){}try{inv=parseInt(localStorage.getItem('hu_i_'+u.number)||'0')}catch(e){}document.getElementById('hi').innerText='Hi '+u.name;document.getElementById('mc').innerText=u.code;document.getElementById('bal').innerText='Rs'+bal;document.getElementById('iv').innerText=inv}function add(n){bal+=n;localStorage.setItem('hu_b_'+u.number,bal);document.getElementById('bal').innerText='Rs'+bal;alert('+Rs'+n+' Added')}function daily(){let t=new Date().toDateString();if(ld==t){alert('Daily already done today');return}ld=t;localStorage.setItem('hu_d_'+u.number,t);add(2)}function game(){let t=new Date().toDateString();if(lg==t){alert('Game already played today');return}let ans=prompt('Tap Game: Type 10 and press OK');if(ans=='10'){lg=t;localStorage.setItem('hu_g_'+u.number,t);add(5)}else alert('Type 10')}function invite(){let link='https://t.me/HujaifaTaskBot?start=ref_'+u.code;prompt('Your Refer Code: '+u.code+'\nShare this link, you will get Rs10 when someone joins with your code (No reward on click):\n'+link,link)}function join(){if(jo){alert('Already Joined');return}window.open('https://t.me/HujaifaHS','_blank');setTimeout(()=>{if(confirm('Did you join? Press OK to get Rs10')){jo=true;localStorage.setItem('hu_j_'+u.number,'y');add(10)}},800)}function wd(){if(bal<100){alert('Min Rs100 required, you have Rs'+bal);return}let upi=prompt('Enter your UPI ID:');if(upi){alert('Withdraw Request Rs'+bal+' to '+upi+' - Will be paid in 24h');bal=0;localStorage.setItem('hu_b_'+u.number,bal);document.getElementById('bal').innerText='Rs'+bal}}function logout(){if(confirm('Logout?')){u.lg=false;localStorage.setItem('hu_u',JSON.stringify(u));sh('lP')}}function ad(){add(2)}</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PAIZVA - Zero Balance</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui}
+body{background:#f1f3fd;padding-bottom:80px}
+.top{padding:12px;display:flex;justify-content:space-between}
+.pill{background:#fff;padding:8px 14px;border-radius:20px;font-size:14px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.card{background:#fff;margin:16px;border-radius:20px;padding:16px;box-shadow:0 8px 24px rgba(0,0,0,.05)}
+.tabs{display:flex;background:#e8ecff;border-radius:14px;padding:4px}
+.tabs div{flex:1;text-align:center;padding:10px;border-radius:12px;font-weight:600;cursor:pointer}
+.tabs .active{background:#fff;color:#1e40af}
+.input{background:#f1f5f9;border-radius:14px;padding:14px;display:flex;gap:10px;margin-top:12px}
+.input input{border:0;background:transparent;outline:0;width:100%}
+.btn{width:100%;background:linear-gradient(90deg,#1e5bd7,#3b82f6);color:#fff;border:0;padding:16px;border-radius:28px;font-weight:700;margin-top:16px;font-size:17px}
+.balance{background:linear-gradient(135deg,#1e5bd7,#2a7de1);color:#fff;border-radius:22px;padding:20px;margin:16px}
+.balance h1{font-size:36px;margin-top:6px}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:10px 0;border-top:1px solid #e2e8f0}
+.nav div{text-align:center;color:#64748b;font-size:12px}
+.nav .active{color:#1e5bd7;font-weight:700}
+.hidden{display:none}
+.whiteBtn{background:#fff;color:#1e5bd7;border:0;padding:12px 24px;border-radius:24px;font-weight:700}
+.invite{background:#f1f5f9;border-radius:14px;padding:14px;display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+</style>
+</head>
+<body>
+
+<div id="loginPage">
+  <div class="top"><div class="pill">🎧 Support</div><div class="pill">🌐 English ▼</div></div>
+  <div style="text-align:center;margin-top:10px">
+    <div style="width:90px;height:90px;background:linear-gradient(135deg,#4facfe,#1e5bd7);border-radius:22px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:50px;font-weight:800;margin:0 auto">P</div>
+    <h1 style="margin-top:10px">Welcome to PAIZVA</h1>
+    <p style="color:#64748b;font-size:14px;margin-top:4px">Connect WhatsApp and explore daily rewards</p>
+  </div>
+  <div class="card">
+    <div class="tabs"><div class="active" id="tabL" onclick="showL()">Login</div><div id="tabC" onclick="showC()">Create account</div></div>
+    <div class="input"><span>📱</span><b>+91 |</b><input id="ph" placeholder="Phone number"></div>
+    <div class="input"><span>🔒</span><input id="ps" type="password" placeholder="Login password"></div>
+    <div class="input hidden" id="cps"><span>🔒</span><input placeholder="Confirm login password"></div>
+    <button class="btn" id="mainBtn" onclick="go()">Login</button>
+  </div>
+</div>
+
+<div id="mePage" class="hidden">
+  <div class="balance">
+    <p>Account Balance</p>
+    <h1>₹<span id="bal">0.00</span></h1><br>
+    <button class="whiteBtn">📁 Withdraw</button><br><br>
+    <button style="background:rgba(255,255,255,.2);color:#fff;border:0;padding:8px 16px;border-radius:20px">↻ History</button>
+  </div>
+  <div class="card">
+    <h3>☘ Invite & earn</h3><p style="color:#64748b;font-size:13px">Each activated friend generates a reward</p>
+    <div class="invite"><div><small>Invitation Code</small><h2>EZ655X</h2></div><button style="background:#1e5bd7;color:#fff;border:0;padding:10px 18px;border-radius:20px">Copy</button></div>
+    <div style="margin-top:12px;background:#eef2ff;padding:12px;border-radius:12px;color:#1e5bd7;font-weight:600">Invitation Task ›</div>
+  </div>
+  <div class="card"><p>📦 Income Details</p></div>
+  <div class="card">
+    <div style="padding:12px;border-bottom:1px solid #eee">📧 Important Messages ›</div>
+    <div style="padding:12px;border-bottom:1px solid #eee">👥 My Team ›</div>
+    <div style="padding:12px">🔒 Change Password ›</div>
+  </div>
+  <div class="card"><p style="text-align:center;color:#b91c1c;font-weight:700" onclick="location.reload()">Logout</p></div>
+</div>
+
+<div class="nav"><div>⊞<br>Home</div><div>◍<br>Tasks</div><div>📱<br>WhatsApp</div><div class="active">👤<br>Me</div></div>
+
+<script>
+function showC(){document.getElementById('tabC').classList.add('active');document.getElementById('tabL').classList.remove('active');document.getElementById('cps').classList.remove('hidden');document.getElementById('mainBtn').innerText='Create account';}
+function showL(){document.getElementById('tabL').classList.add('active');document.getElementById('tabC').classList.remove('active');document.getElementById('cps').classList.add('hidden');document.getElementById('mainBtn').innerText='Login';}
+function go(){
+ if(!document.getElementById('ph').value){alert('Phone number দাও');return;}
+ // প্রথমবার Zero Balance
+ document.getElementById('bal').innerText='0.00';
+ localStorage.setItem('paizva_bal','0.00');
+ document.getElementById('loginPage').classList.add('hidden');
+ document.getElementById('mePage').classList.remove('hidden');
+}
+</script>
+</body>
+</html>
