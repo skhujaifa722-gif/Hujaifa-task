@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hujaifa Task</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+body{background:#0f0f0f;color:#fff;font-family:sans-serif;padding:16px;margin:0}
+.card{background:#1e1e1e;border-radius:16px;padding:16px;margin-top:14px}
+.btn{background:#27272a;width:100%;padding:14px;border-radius:12px;color:#fff;border:0;margin-top:10px;font-size:16px}
+.yellow{background:#facc15;color:#000;font-weight:bold;border-radius:24px}
+</style>
+</head>
+<body>
+<h2>👋 Hi, <span id="u">User</span>!</h2>
+<div class="card">💰 Balance: <b style="color:#facc15" id="b">₹20.00</b><br><br>⚡ Energy: 1000</div>
+<button class="btn" onclick="add(2)">📺 Watch Ad +₹2</button>
+<button class="btn" onclick="add(2)">✅ Daily Check-in</button>
+<button class="btn" onclick="add(5)">🎮 Play Game</button>
+<button class="btn" onclick="add(10)">👥 Invite Friends</button>
+<div class="card">📢 Join @HujaifaHS = +₹10 Bonus</div>
+<button class="btn yellow" onclick="alert('Withdraw: Invite 3 friends! Balance ₹'+bal)">💳 Withdraw</button>
+<script>
+let bal=20;let tg=Telegram.WebApp;tg.ready();
+try{document.getElementById('u').innerText=tg.initDataUnsafe.user.first_name}catch(e){}
+function add(n){bal+=n;document.getElementById('b').innerText='₹'+bal+'.00';tg.HapticFeedback.notificationOccurred('success');alert('₹'+n+' Added!')}
+</script>
+</body>
+  </html>
