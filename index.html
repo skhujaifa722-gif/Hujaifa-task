@@ -1,37 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hujaifa Task</title>
+<title>Hujaifa Task - Earn Money</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="https://sad.adsgram.ai/js/sad.js"></script>
 <style>
-body{background:#0f0f0f;color:#fff;font-family:sans-serif;padding:16px;margin:0}
-.card{background:#1e1e1e;border-radius:16px;padding:16px;margin-top:14px}
-.btn{background:#27272a;width:100%;padding:14px;border-radius:12px;color:#fff;border:0;margin-top:10px;font-size:16px}
-.yellow{background:#facc15;color:#000;font-weight:bold;border-radius:24px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#fff;font-family:system-ui,sans-serif;padding:16px;padding-bottom:80px}
+h2{margin:10px 0 20px 0}
+.card{background:#1e1e1e;border:1px solid #2a2a2a;border-radius:18px;padding:18px;margin-bottom:14px}
+.balance{font-size:26px;font-weight:800;color:#facc15;margin-top:8px}
+.sub{color:#a1a1aa;font-size:14px;margin-top:4px}
+.btn{background:#27272a;color:#fff;border:0;width:100%;padding:16px;border-radius:14px;font-size:16px;font-weight:600;margin-top:12px;cursor:pointer}
+.btn:active{transform:scale(0.98)}
+.btn:disabled{opacity:0.5}
+.yellow{background:#facc15;color:#000}
+.icon{margin-right:6px}
 </style>
 </head>
 <body>
 <h2>👋 Hi, <span id="u">User</span>!</h2>
-<div class="card">💰 Balance: <b style="color:#facc15" id="b">₹20.00</b><br><br>⚡ Energy: 1000</div>
-<button class="btn" onclick="showAd()">🎬 Watch Ad +₹2</button>
-<button class="btn" onclick="add(2)">✅ Daily Check-in</button>
-<button class="btn" onclick="add(5)">🎮 Play Game</button>
-<button class="btn" onclick="add(10)">👥 Invite Friends</button>
-<div class="card">🎁 Join @HujaifaHS = +₹10 Bonus</div>
-<button class="btn yellow" onclick="alert('Withdraw: Invite 3 friends! Balance ₹'+bal)">💰 Withdraw</button>
+
+<div class="card">
+<div class="sub">💰 Current Balance</div>
+<div class="balance" id="b">₹20.00</div>
+<div class="sub" style="margin-top:10px">⚡ Energy: 1000/1000</div>
+</div>
+
+<div class="card">
+<div style="font-weight:700">🎬 Earn by Watching Ads</div>
+<div class="sub">Watch full ad and earn instantly</div>
+<button class="btn yellow" id="adBtn" onclick="showAd()">▶️ Watch Ad +₹2</button>
+</div>
+
+<button class="btn" onclick="add(2)">✅ Daily Check-in +₹2</button>
+<button class="btn" onclick="add(5)">🎮 Play Game +₹5</button>
+<button class="btn" onclick="add(10)">👥 Invite Friends +₹10</button>
+
+<div class="card" style="margin-top:14px">
+🎁 <b>Bonus:</b> Join @HujaifaHS = +₹10
+</div>
+
+<button class="btn yellow" onclick="withdraw()">💰 Withdraw</button>
+
 <script>
-let bal=20;let tg=Telegram.WebApp;tg.ready();
-try{document.getElementById('u').innerText=tg.initDataUnsafe.user.first_name}catch(e){}
-const AdController = window.Adsgram.init({ blockId: "int-56246" });
-function showAd(){
-  AdController.show().then((result)=>{
-    if(result.done){ add(2); }
-  }).catch((e)=>{ alert('Ad not ready, try again'); console.log(e); });
+let bal = parseInt(localStorage.getItem('hujaifa_bal') || '20');
+let tg = window.Telegram ? window.Telegram.WebApp : null;
+if(tg){ tg.ready(); tg.expand(); try{document.getElementById('u').innerText = tg.initDataUnsafe.user.first_name;}catch(e){} }
+
+document.getElementById('b').innerText = '₹' + bal + '.00';
+
+function updateBal(){
+  document.getElementById('b').innerText = '₹' + bal + '.00';
+  localStorage.setItem('hujaifa_bal', bal);
+  if(tg){ try{tg.HapticFeedback.notificationOccurred('success');}catch(e){} }
 }
-function add(n){bal+=n;document.getElementById('b').innerText='₹'+bal+'.00';tg.HapticFeedback.notificationOccurred('success')}
+function add(n){
+  bal += n;
+  updateBal();
+  alert('✅ +₹' + n + ' Added! New Balance: ₹' + bal);
+}
+function withdraw(){
+  if(bal < 100){ alert('❌ Minimum Withdraw ₹100. Your Balance: ₹' + bal + '\nInvite friends to earn more!'); }
+  else{ alert('✅ Withdraw Request Sent! ₹' + bal); }
+}
+
+// Adsgram - Your Real ID
+const AdController = window.Adsgram ? window.Adsgram.init({ blockId: "int-56246" }) : null;
+
+function showAd(){
+  const btn = document.getElementById('adBtn');
+  if(!AdController){
+    alert('❌ Adsgram not loaded. Check internet & refresh.');
+    return;
+  }
+  btn.innerText = "⏳ Loading Ad...";
+  btn.disabled = true;
+
+  AdController.show().then((result)=>{
+    btn.innerText = "▶️ Watch Ad +₹2";
+    btn.disabled = false;
+    if(result && result.done){
+      bal += 2;
+      updateBal();
+      alert('🎉 Ad Complete! +₹2 Added. Balance: ₹' + bal);
+    } else {
+      alert('⚠️ Please watch full ad to get reward');
+    }
+  }).catch((err)=>{
+    btn.innerText = "▶️ Watch Ad +₹2";
+    btn.disabled = false;
+    console.log("Ad Error:", err);
+    let msg = err && (err.error || err.description) ? (err.error + " - " + err.description) : JSON.stringify(err);
+    if(msg.includes("No ads") || msg.includes("not found") || msg.includes("empty")){
+      alert('⏳ Adsgram: No ads available now.\n\nYour block is new (Created Today). It takes 1-2 hours for ads to start.\nPlease try after 1 hour.');
+    } else {
+      alert('Ad Error: ' + msg);
+    }
+  });
+}
 </script>
 </body>
 </html>
