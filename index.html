@@ -1,142 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>HUJAIFA - Official</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HUJAIFA - Free Affiliate Marketing</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui; -webkit-tap-highlight-color: transparent;}
-body{background:#f1f3fd;padding-bottom:90px;touch-action: manipulation;}
-.top{padding:12px;display:flex;justify-content:space-between;position:relative;z-index:10}
-.pill{background:#fff;padding:9px 15px;border-radius:20px;font-size:14px;box-shadow:0 2px 8px rgba(0,0,0,.08);color:#0f172a;font-weight:600;display:flex;align-items:center;gap:6px}
-.card{background:#fff;margin:14px;border-radius:20px;padding:16px;box-shadow:0 8px 24px rgba(0,0,0,.05);position:relative;z-index:2}
-.tabs{display:flex;background:#e8ecff;border-radius:14px;padding:4px}
-.tabs div{flex:1;text-align:center;padding:10px;border-radius:12px;font-weight:600;cursor:pointer}
-.tabs .active{background:#fff;color:#1e40af}
-.input{background:#f1f5f9;border-radius:14px;padding:14px;display:flex;gap:10px;margin-top:12px;align-items:center}
-.input input{border:0;background:transparent;outline:0;width:100%;font-size:15px}
-.btn{width:100%;background:#1e5bd7;color:#fff;border:0;padding:15px;border-radius:28px;font-weight:700;margin-top:16px;font-size:17px;cursor:pointer}
-.btn:active{transform:scale(0.98)}
-.balance{background:linear-gradient(135deg,#1e5bd7,#2a7de1);color:#fff;border-radius:22px;padding:20px;margin:14px}
-.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:12px 0;border-top:1px solid #e2e8f0;z-index:9999}
-.nav div{text-align:center;color:#64748b;font-size:12px;cursor:pointer;padding:6px 16px;border-radius:14px}
-.nav .active{color:#1e5bd7;font-weight:800;background:#eef2ff}
-.hidden{display:none !important}
-.page{padding:6px; min-height:80vh}
-.clickBox{background:#fff;padding:16px;border-radius:16px;margin:12px 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-.clickBox:active{background:#f1f5f9}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+body{background:#f5f7ff;padding-bottom:80px}
+.headerTop{background:#fff;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:99;border-bottom:1px solid #f1f5f9}
+.logoP{display:flex;gap:8px;align-items:center}
+.logoIcon{width:46px;height:46px;background:linear-gradient(135deg,#1e9aff,#104ed1);border-radius:14px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:28px}
+.balCard{background:linear-gradient(135deg,#1646d1,#2a7bff);border-radius:22px;padding:18px;margin:12px;color:#fff}
+.balRow{display:flex;justify-content:space-between;font-size:13px}
+.balRow b{font-size:22px}
+.btnW{background:#fff;color:#1646d1;border:0;padding:12px 22px;border-radius:30px;font-weight:800;display:flex;gap:8px;align-items:center;cursor:pointer}
+.btnR{background:rgba(255,255,255,.18);color:#fff;border:0;padding:12px 22px;border-radius:30px;font-weight:700;display:flex;gap:8px;align-items:center}
+.mainBanner{background:linear-gradient(135deg,#0b48d6,#3d9bff);border-radius:22px;margin:12px;padding:16px;color:#fff;position:relative;overflow:hidden;display:flex;justify-content:space-between;align-items:center}
+.taskCard{background:#fff;border-radius:20px;margin:12px;padding:16px;box-shadow:0 4px 20px rgba(0,0,0,.05)}
+.taskItem{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid #f1f5f9;align-items:center;cursor:pointer}
+.taskItem:last-child{border:0}
+.taskIcon{width:58px;height:58px;background:linear-gradient(135deg,#aee3ff,#2a7bff);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0}
+.green{color:#10b981;font-weight:800;margin-top:4px}
+.notifBar{background:#fff;border-radius:14px;margin:12px;padding:12px 14px;display:flex;gap:10px;align-items:center;font-size:13px;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+.dot{width:10px;height:10px;background:#22c55e;border-radius:50%;display:inline-block}
+.streakBox{display:flex;gap:8px;overflow:auto;margin-top:10px}
+.streakBox div{min-width:72px;background:#eef2ff;border-radius:14px;padding:10px;text-align:center;font-size:12px}
+.streakBox .active{background:#ffedd5;border:1px solid #fdba74}
+.profitBanner{background:linear-gradient(90deg,#f0f7ff,#d6ebff);border-radius:18px;margin:12px;padding:16px;display:flex;justify-content:space-between;align-items:center;border:1px solid #dbeafe}
+.guideBanner{background:linear-gradient(90deg,#eef6ff,#e0edff);border-radius:18px;margin:12px;padding:14px;border:1px solid #dbeafe}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:10px 0;border-top:1px solid #e2e8f0;z-index:999}
+.nav div{text-align:center;font-size:11px;color:#64748b;cursor:pointer;font-weight:600}
+.nav .active{color:#1646d1}
+.hidden{display:none!important}
+.inputRow{display:flex;align-items:center;background:#eef2ff;border-radius:14px;padding:14px;margin-top:12px;gap:10px}
+.inputRow input{border:0;background:transparent;outline:0;width:100%;font-size:15px}
+.btn{width:100%;background:linear-gradient(90deg,#1646d1,#2a7bff);color:#fff;border:0;padding:15px;border-radius:30px;font-weight:800;font-size:16px;cursor:pointer;margin-top:14px}
+.tabs{display:flex;background:#e8ecff;border-radius:30px;padding:4px;margin-bottom:12px}
+.tabs div{flex:1;text-align:center;padding:12px;border-radius:30px;font-weight:700;cursor:pointer}
+.tabs .active{background:#fff;color:#1646d1;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.loginCard{background:#fff;border-radius:26px;padding:20px;margin:16px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.codeBox{display:flex;gap:6px;margin-top:12px;justify-content:center}
+.codeBox input{width:38px;height:48px;text-align:center;border-radius:10px;border:1px solid #e2e8f0;font-weight:800;background:#f8fafc}
+.timer{font-size:22px;font-weight:900;color:#f59e0b;text-align:center}
+.supportBtn{position:fixed;bottom:90px;right:14px;width:54px;height:54px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.15);z-index:99;font-size:26px;cursor:pointer}
 </style>
 </head>
 <body>
 
+<!-- LOGIN PAGE - Exactly like your screenshot -->
 <div id="loginPage">
-  <div class="top">
-    <a href="https://t.me/Hujaifasupport" target="_blank" style="text-decoration:none"><div class="pill">🎧 24/7 Support</div></a>
-    <div class="pill">🌐 English ▼</div>
+  <div style="text-align:center;padding-top:40px">
+    <div class="logoIcon" style="width:90px;height:90px;font-size:48px;margin:0 auto;border-radius:22px">H</div>
+    <h1 style="font-size:28px;margin-top:16px">Welcome to HUJAIFA</h1>
+    <p style="color:#64748b;font-size:14px;margin-top:6px;padding:0 30px">Connect WhatsApp by pairing code and explore daily rewards</p>
   </div>
-  <div style="text-align:center;margin-top:10px">
-    <div style="width:90px;height:90px;background:linear-gradient(135deg,#ff7a18,#ff3c00);border-radius:22px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:50px;font-weight:800;margin:0 auto">H</div>
-    <h1 style="margin-top:10px">Welcome to HUJAIFA</h1>
-    <p style="color:#64748b;font-size:14px;margin-top:4px">Zero Balance Account</p>
+  <div class="loginCard">
+    <div class="tabs"><div class="active" id="tabL" onclick="setMode('login')">Login</div><div id="tabC" onclick="setMode('create')">Create account</div></div>
+    <div class="inputRow"><span>📱</span><b style="border-right:1px solid #cbd5e1;padding-right:10px">+91</b><input id="phone" type="number" placeholder="Phone number"></div>
+    <div class="inputRow"><span>🔒</span><input id="pass" type="password" placeholder="Login password"></div>
+    <div class="inputRow hidden" id="cPassRow"><span>🔒</span><input id="cPass" type="password" placeholder="Confirm password"></div>
+    <div style="display:flex;justify-content:space-between;margin-top:12px;font-size:13px"><label style="display:flex;gap:6px;align-items:center;color:#1646d1;font-weight:600"><input type="checkbox" checked> Remember Password</label><span style="color:#64748b">Forgot Password</span></div>
+    <button class="btn" onclick="handleAuth()">Login</button>
+    <p id="msg" style="text-align:center;color:#ef4444;margin-top:10px;font-weight:700;font-size:13px"></p>
   </div>
-  <div class="card">
-    <div class="tabs"><div class="active" id="tL" onclick="showLogin()">Login</div><div id="tC" onclick="showCreate()">Create account</div></div>
-    <div class="input"><b>+91 |</b><input id="phone" placeholder="Phone number" type="number"></div>
-    <div class="input"><span>🔒</span><input id="pass" type="password" placeholder="Password"></div>
-    <div class="input hidden" id="cpassBox"><span>🔒</span><input id="cpass" type="password" placeholder="Confirm password"></div>
-    <button class="btn" id="actionBtn" onclick="handleAuth()">Login</button>
-    <p id="msg" style="text-align:center;color:red;margin-top:12px;font-size:14px;font-weight:600"></p>
-  </div>
-</div>
-
-<div id="homePage" class="hidden page">
-  <h2 style="padding:10px">🏠 Home - HUJAIFA</h2>
-  <div class="clickBox" onclick="openPage('tasks')"><div><b>📋 Daily Tasks</b><br><small>Earn ₹10 daily</small></div><div>›</div></div>
-  <div class="clickBox" onclick="alert('WhatsApp Task Coming Soon')"><div><b>💬 WhatsApp Task</b><br><small>₹50.00 per task</small></div><div>›</div></div>
-  <div class="clickBox" onclick="openPage('me')"><div><b>💰 Check Balance</b><br><small>Your earnings</small></div><div>›</div></div>
-</div>
-
-<div id="tasksPage" class="hidden page">
-  <h2 style="padding:10px">📋 Tasks</h2>
-  <div class="card">
-    <h3>Daily Check-in</h3><p style="color:#64748b;margin-top:6px">Click to claim ₹10</p>
-    <button class="btn" onclick="addBal(10)">Claim ₹10 Now</button>
-  </div>
-  <div class="card">
-    <h3>Invite 1 Friend</h3><p style="color:#64748b;margin-top:6px">Reward ₹100</p>
-    <button class="btn" style="background:#10b981" onclick="addBal(100)">Claim ₹100</button>
+  <div style="display:flex;justify-content:space-around;background:#eef2ff;border-radius:20px;margin:16px;padding:16px;text-align:center;font-size:12px">
+    <div><div style="background:#fff;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:20px">🔗</div><b>Pairing code</b><br><span style="color:#64748b">Linked devices</span></div>
+    <div><div style="background:#fff;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:20px">◎</div><b>Simple</b><br><span style="color:#64748b">Quick access</span></div>
+    <div><div style="background:#fff;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:20px">◇</div><b>Account</b><br><span style="color:#64748b">Reward records</span></div>
   </div>
 </div>
 
-<div id="waPage" class="hidden page">
-  <h2 style="padding:10px">WhatsApp</h2>
-  <div class="card"><p>Connect WhatsApp to earn</p><br><button class="btn" onclick="alert('Connected! Demo')">Connect Now</button></div>
-</div>
-
-<div id="mePage" class="hidden page">
-  <div class="balance">
-    <p>Account Balance</p>
-    <h1>₹<span id="bal">0.00</span></h1><br>
-    <button style="background:#fff;color:#1e5bd7;border:0;padding:12px 24px;border-radius:24px;font-weight:700" onclick="alert('Minimum withdraw ₹100')">📁 Withdraw</button>
-    <button style="background:rgba(255,255,255,.25);color:#fff;border:0;padding:10px 18px;border-radius:20px;margin-left:10px" onclick="alert('No history yet')">↻ History</button>
+<!-- HOME - Exactly like Paizva screenshot -->
+<div id="home" class="hidden">
+  <div class="headerTop">
+    <div class="logoP"><div class="logoIcon">H</div><div><b style="font-size:18px">hujaifa</b><br><small style="color:#64748b">918327456490</small></div></div>
+    <div style="display:flex;gap:8px;align-items:center"><span style="font-size:13px">🌐 English</span><div style="border:1px solid #cbd5e1;border-radius:20px;padding:8px 14px;font-weight:700;display:flex;gap:6px">⬇ APP</div></div>
   </div>
-  <div class="clickBox" onclick="copyCode()"><div>Your Invite Code<br><b id="myCode">HJ0000</b></div><div style="background:#1e5bd7;color:#fff;padding:8px 16px;border-radius:20px">Copy</div></div>
-  <div class="clickBox" onclick="alert('Income Details - Coming Soon')"><div>📦 Income Details</div><div>›</div></div>
-  <div class="clickBox" onclick="alert('My Team - Coming Soon')"><div>👥 My Team</div><div>›</div></div>
-  <div class="clickBox" onclick="logout()"><div style="color:red;font-weight:700">🚪 Logout</div><div>›</div></div>
+
+  <div class="balCard">
+    <div class="balRow"><span>Available balance</span><span>Total earnings <b style="color:#6ee7b7">₹<span id="earn">0.00</span></b></span></div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:6px"><h1 style="font-size:34px">₹<span id="bal">0.00</span></h1><span style="font-size:13px">Total withdrawn <b>₹0.00</b></span></div>
+    <div style="display:flex;gap:10px;margin-top:14px"><button class="btnW" onclick="openWithdraw()">📤 Withdraw</button><button class="btnR" onclick="go('me')">📄 Reward records</button></div>
+  </div>
+
+  <div class="mainBanner">
+    <div><h2 style="font-size:26px">Hujaifa</h2><p style="font-size:11px;opacity:.9">Free Affiliate Marketing Platform</p><h1 style="font-size:28px">Get <span style="color:#7dd3fc">Rewards</span></h1><div style="margin-top:8px;font-size:12px;line-height:18px"><div>🔗 Share Deals, Earn More!</div><div>✅ No Investment</div><div>✅ Simple Tasks</div><div>✅ Extra Income</div></div></div>
+    <div style="text-align:center"><div style="background:rgba(255,255,255,.15);padding:6px 10px;border-radius:20px;font-size:11px">ZERO INVESTMENT NEEDED</div><div style="font-size:60px;margin-top:10px">💰</div><div style="background:#fff;color:#1646d1;padding:4px 10px;border-radius:10px;font-weight:800">Rs</div></div>
+  </div>
+
+  <div class="notifBar"><span class="dot"></span> 🍀 <b style="color:#1646d1">91*****5375</b> received a withdrawal of <b style="color:#10b981">₹200....</b></div>
+
+  <div class="taskCard">
+    <b style="display:flex;gap:8px;align-items:center">📋 Available tasks</b>
+    <div class="taskItem" onclick="go('wa')"><div class="taskIcon">💬</div><div style="flex:1"><b>Activate WhatsApp</b><p style="color:#64748b;font-size:13px;margin-top:2px">Keep your account active and unlock reward points through platform activities.</p><div class="green">₹ 50.00</div></div><div style="color:#1646d1;font-weight:800">›</div></div>
+    <div class="taskItem" onclick="go('tasks')"><div class="taskIcon" style="background:linear-gradient(135deg,#a7f3d0,#34d399)">👥</div><div style="flex:1"><b>Invitation Task</b><p style="color:#64748b;font-size:13px">Each activated friend generates a reward</p><div class="green">₹ 100.00</div></div><div style="color:#1646d1;font-weight:800">›</div></div>
+    <div class="taskItem" onclick="go('wa')"><div class="taskIcon" style="background:linear-gradient(135deg,#bfdbfe,#60a5fa)">⏰</div><div style="flex:1"><b>Online 24H</b><p style="color:#64748b;font-size:13px">Stay connected on WhatsApp and enjoy activity-based rewards.</p><div class="green">₹ 40.00</div></div><div style="color:#1646d1;font-weight:800">›</div></div>
+  </div>
+
+  <div class="taskCard">
+    <div style="display:flex;justify-content:space-between"><b>📅 Daily check-in streak</b><small style="color:#1646d1" onclick="go('tasks')">View progress ›</small></div>
+    <div class="streakBox"><div>Day 1<br>◇<br>₹10.00</div><div>Day 2<br>◇<br>₹10.00</div><div>Day 3<br>◇<br>₹10.00</div><div>Day 4<br>◇<br>₹10.00</div><div>Day 5<br>◇<br>₹10.00</div><div>Day 6<br>◇<br>₹10.00</div><div class="active">Day 7<br>◇<br>₹10.00</div></div>
+  </div>
+
+  <div class="profitBanner"><div><div style="width:40px;height:4px;background:#3b82f6;border-radius:10px"></div><h2 style="margin-top:8px">Profit Advantage</h2><p style="color:#475569;font-size:13px;margin-top:4px">Explore ways to earn, track your progress and manage rewards in one place.</p></div><div style="font-size:50px">📈</div></div>
+  <div class="guideBanner"><small style="font-weight:700;color:#64748b">STEP-BY-STEP GUIDE :</small><h2>HOW TO CREATE<br><span style="color:#1646d1">EARNING LINKS</span><br>ON HUJAIFA</h2></div>
+  <div class="guideBanner"><h3>Connect with <span style="color:#1646d1">Hujaifa</span><br>through <span style="color:#10b981">WhatsApp</span></h3><p style="font-size:13px;color:#64748b">and unlock exciting rewards.</p><div style="text-align:right;font-size:40px">💬</div></div>
+  <p style="text-align:center;font-size:12px;color:#94a3b8;margin:16px">© 2026 HUJAIFA Technology Ltd. All rights reserved<br>* Privacy Policy | Terms of Service</p>
 </div>
 
-<div class="nav">
-  <div id="navHome" onclick="openPage('home')"><div style="font-size:18px">⊞</div>Home</div>
-  <div id="navTasks" onclick="openPage('tasks')"><div style="font-size:18px">◎</div>Tasks</div>
-  <div id="navWa" onclick="openPage('wa')"><div style="font-size:18px">📱</div>WA</div>
-  <div id="navMe" class="active" onclick="openPage('me')"><div style="font-size:18px">👤</div>Me</div>
+<!-- TASKS + WHATSAPP + WITHDRAW + ME (Logic same as before) -->
+<div id="tasks" class="hidden">
+  <div class="taskCard"><h3>Earn More With HUJAIFA Referrals</h3><p style="font-size:13px;color:#64748b">Invite 10/30/50 users and earn</p><div style="display:flex;gap:10px;margin-top:12px;overflow:auto"><div style="min-width:100px;background:#eef2ff;border-radius:12px;padding:10px;text-align:center"><b>10 Users</b><br><b style="color:#1646d1">₹1050</b></div><div style="min-width:100px;background:#eef2ff;border-radius:12px;padding:10px;text-align:center"><b>30 Users</b><br><b style="color:#1646d1">₹3350</b></div><div style="min-width:100px;background:#eef2ff;border-radius:12px;padding:10px;text-align:center"><b>50 Users</b><br><b style="color:#1646d1">₹6150</b></div></div></div>
+  <div class="taskCard"><h4>Daily Check-in - ₹10</h4><button class="btn" onclick="claimDaily()">Claim Daily</button></div>
+  <div class="taskCard"><h4>Invitation Task - ₹100</h4><p style="font-size:13px;color:#64748b">Need 24h WhatsApp active</p><button class="btn" style="background:#10b981" onclick="claimInvite()">Claim ₹100</button></div>
 </div>
+
+<div id="wa" class="hidden">
+  <div class="taskCard" style="background:#1646d1;color:#fff"><h3>WhatsApp Online Rewards</h3><div style="background:rgba(255,255,255,.15);border-radius:12px;padding:14px;margin-top:12px;text-align:center"><div id="waStatus">Not Connected</div><div class="timer" id="waTimer" style="color:#fff">00:00:00</div><div style="font-size:12px" id="waInfo">Keep active 24h to get ₹50</div></div><div style="display:flex;justify-content:space-between;margin-top:12px"><div>Today<br><b id="todayP">0</b></div><div>Status<br><b id="liveStatus">Offline</b></div></div></div>
+  <div class="taskCard"><h3>Connect WhatsApp</h3><div class="inputRow"><select style="background:transparent;border:0;font-weight:700"><option>+91</option></select><input id="waNum" placeholder="WhatsApp number"></div><button class="btn" id="getCodeBtn" onclick="getCode()">Get Code</button><div class="codeBox"><input maxlength="1"><input maxlength="1"><input maxlength="1"><input maxlength="1"><input maxlength="1"><input maxlength="1"><input maxlength="1"><input maxlength="1"></div><p id="codeShow" style="text-align:center;color:#1646d1;font-weight:700;margin-top:8px"></p><button class="btn" id="verifyBtn" onclick="verifyWA()" disabled>Verify & Connect</button><button class="btn hidden" id="claimWA" style="background:#f59e0b" onclick="claimWAReward()">Claim ₹50 Reward</button></div>
+</div>
+
+<div id="withdraw" class="hidden">
+  <div class="headerTop"><div onclick="go('home')" style="font-size:24px">‹</div><b>Withdraw</b><div></div></div>
+  <div class="balCard"><p>Available balance</p><h1>₹<span id="wBal">0.00</span></h1></div>
+  <div class="taskCard" id="bankSetupCard"><h3>🏦 Setup Bank Account</h3><div class="inputRow"><input id="holderName" placeholder="Account Holder Name"></div><div class="inputRow"><input id="bankName" placeholder="Bank Name"></div><div class="inputRow"><input id="accNum" type="number" placeholder="Account Number"></div><div class="inputRow"><input id="ifsc" placeholder="IFSC Code"></div><button class="btn" onclick="saveBank()">Save Bank Account</button></div>
+  <div class="taskCard hidden" id="withdrawFormCard"><div style="display:flex;justify-content:space-between"><div><b>Bank</b><br><small id="savedBankInfo"></small></div><div style="color:#1646d1;font-weight:700" onclick="editBank()">Edit</div></div><div class="inputRow"><span>₹</span><input id="wAmount" type="number" placeholder="Min ₹100"></div><button class="btn" onclick="doWithdraw()">Withdraw Now</button><div id="wHistory" style="margin-top:12px;font-size:13px;color:#64748b;text-align:center">No withdrawals yet</div></div>
+</div>
+
+<div id="me" class="hidden"><div class="balCard"><p>Account Balance</p><h1>₹<span id="bal2">0.00</span></h1><p>Invite Code: <b id="myCode">HJ0000</b></p></div><div class="taskCard"><div onclick="if(confirm('Logout?')){localStorage.removeItem('hujaifa_current');location.reload()}" style="color:#ef4444;text-align:center;font-weight:800">Logout</div></div></div>
+
+<div class="nav"><div id="nHome" onclick="go('home')" class="active">⊞<br>Home</div><div id="nTasks" onclick="go('tasks')">◎<br>Tasks</div><div id="nWa" onclick="go('wa')">📱<br>WhatsApp</div><div id="nMe" onclick="go('me')">👤<br>Me</div></div>
+<div class="supportBtn" onclick="window.open('https://t.me/Hujaifasupport','_blank')">🎧</div>
 
 <script>
-let mode='login';
-function showCreate(){mode='create';document.getElementById('tC').classList.add('active');document.getElementById('tL').classList.remove('active');document.getElementById('cpassBox').classList.remove('hidden');document.getElementById('actionBtn').innerText='Create account';}
-function showLogin(){mode='login';document.getElementById('tL').classList.add('active');document.getElementById('tC').classList.remove('active');document.getElementById('cpassBox').classList.add('hidden');document.getElementById('actionBtn').innerText='Login';}
+let mode='login', genCode='', waInterval=null;
+let userData={bal:0,earn:0,waConnectedAt:0,waRewardClaimed:false,lastDaily:'',inviteClaimed:false,code:'HJ0000'};
+function setMode(m){mode=m;document.getElementById('tabL').classList.toggle('active',m=='login');document.getElementById('tabC').classList.toggle('active',m=='create');document.getElementById('cPassRow').classList.toggle('hidden',m=='login')}
 function handleAuth(){
-  const ph=document.getElementById('phone').value.trim();
-  const ps=document.getElementById('pass').value.trim();
-  const cps=document.getElementById('cpass').value.trim();
-  const msg=document.getElementById('msg');
-  if(!ph || !ps){msg.innerText='নাম্বার আর পাসওয়ার্ড দাও';return;}
+  let ph=document.getElementById('phone').value.trim(), ps=document.getElementById('pass').value.trim(), cps=document.getElementById('cPass').value.trim(), msg=document.getElementById('msg');
+  if(!ph||!ps){msg.innerText='Enter phone and password';return}
   let users=JSON.parse(localStorage.getItem('hujaifa_users')||'{}');
-  if(mode==='create'){
-    if(ps!==cps){msg.innerText='Password মিলছে না';return;}
-    if(users[ph]){msg.innerText='একাউন্ট আছে, Login করো';return;}
-    users[ph]={pass:ps,bal:0,code:'HJ'+ph.slice(-4)+Math.floor(Math.random()*90+10)};
-    localStorage.setItem('hujaifa_users',JSON.stringify(users));
-    msg.style.color='green';msg.innerText='Account Created! এখন Login করো';showLogin();return;
-  }else{
-    if(!users[ph]){msg.innerText='এই নাম্বারে একাউন্ট নেই';return;}
-    if(users[ph].pass!==ps){msg.innerText='পাসওয়ার্ড ভুল!';return;}
-    localStorage.setItem('hujaifa_current',ph);
-    document.getElementById('bal').innerText=Number(users[ph].bal).toFixed(2);
-    document.getElementById('myCode').innerText=users[ph].code;
-    document.getElementById('loginPage').classList.add('hidden');
-    openPage('me');
-  }
+  if(mode=='create'){if(ps!=cps){msg.innerText='Passwords not match';return}if(users[ph]){msg.innerText='Account exists';return}users[ph]={pass:ps,bal:0,earn:0,waConnectedAt:0,waRewardClaimed:false,lastDaily:'',inviteClaimed:false,code:'HJ'+ph.slice(-4)+Math.floor(Math.random()*90+10)};localStorage.setItem('hujaifa_users',JSON.stringify(users));msg.style.color='green';msg.innerText='Created! Now login';setMode('login');return}
+  if(!users[ph]){msg.innerText='No account found';return}if(users[ph].pass!=ps){msg.innerText='Wrong password';return}localStorage.setItem('hujaifa_current',ph);userData=users[ph];loadApp();
 }
-function openPage(p){
-  ['home','tasks','wa','me'].forEach(x=>{
-    let pg=document.getElementById(x+'Page'); if(pg) pg.classList.add('hidden');
-    let nv=document.getElementById('nav'+x.charAt(0).toUpperCase()+x.slice(1)); if(nv) nv.classList.remove('active');
-  });
-  document.getElementById(p+'Page').classList.remove('hidden');
-  document.getElementById('nav'+p.charAt(0).toUpperCase()+p.slice(1)).classList.add('active');
-  window.scrollTo(0,0);
-}
-function addBal(n){
-  let ph=localStorage.getItem('hujaifa_current');
-  let users=JSON.parse(localStorage.getItem('hujaifa_users'));
-  users[ph].bal+=n; localStorage.setItem('hujaifa_users',JSON.stringify(users));
-  document.getElementById('bal').innerText=users[ph].bal.toFixed(2);
-  alert('₹'+n+' Added to balance!');
-}
-function logout(){localStorage.removeItem('hujaifa_current');location.reload();}
-function copyCode(){navigator.clipboard.writeText(document.getElementById('myCode').innerText);alert('Code Copied!');}
+function loadApp(){document.getElementById('loginPage').classList.add('hidden');document.getElementById('bal').innerText=userData.bal.toFixed(2);document.getElementById('bal2').innerText=userData.bal.toFixed(2);document.getElementById('earn').innerText=userData.bal.toFixed(2);document.getElementById('myCode').innerText=userData.code;go('home');checkWAStatus();}
+function go(p){['home','tasks','wa','me','withdraw'].forEach(x=>{let e=document.getElementById(x);if(e)e.classList.add('hidden');let n=document.getElementById('n'+x.charAt(0).toUpperCase()+x.slice(1));if(n)n.classList.remove('active')});document.getElementById(p).classList.remove('hidden');let n2=document.getElementById('n'+p.charAt(0).toUpperCase()+p.slice(1));if(n2)n2.classList.add('active')}
+function getCode(){if(!document.getElementById('waNum').value){alert('Enter number');return}genCode=Math.floor(10000000+Math.random()*90000000).toString();document.getElementById('codeShow').innerText='Code: '+genCode.slice(0,4)+' - '+genCode.slice(4);document.getElementById('verifyBtn').disabled=false;document.getElementById('getCodeBtn').innerText='Code Sent';}
+function verifyWA(){let ins=document.querySelectorAll('.codeBox input');let e='';ins.forEach(i=>e+=i.value);if(e.length<8){alert('Enter 8 digit. Your code: '+genCode);return}userData.waConnectedAt=Date.now();saveUser();checkWAStatus();alert('Connected! Keep 24h online');}
+function checkWAStatus(){if(waInterval)clearInterval(waInterval);if(!userData.waConnectedAt){document.getElementById('waStatus').innerText='Not Connected';document.getElementById('waTimer').innerText='00:00:00';return}waInterval=setInterval(()=>{let diff=Date.now()-userData.waConnectedAt, need=24*60*60*1000, left=need-diff;if(left<=0){document.getElementById('waStatus').innerText='24h Completed!';document.getElementById('waTimer').innerText='Ready to Claim';document.getElementById('claimWA').classList.remove('hidden');document.getElementById('verifyBtn').classList.add('hidden');clearInterval(waInterval)}else{let h=Math.floor(left/3600000),m=Math.floor((left%3600000)/60000),s=Math.floor((left%60000)/1000);document.getElementById('waTimer').innerText=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;document.getElementById('waStatus').innerText='Connected - Time Left';}},1000);}
+function claimWAReward(){if(userData.waRewardClaimed){alert('Already claimed');return}if(Date.now()-userData.waConnectedAt<24*60*60*1000){alert('24h not completed');return}userData.bal+=50;userData.earn+=50;userData.waRewardClaimed=true;document.getElementById('todayP').innerText='50';saveUser();updateBal();alert('₹50 Added');}
+function claimDaily(){let t=new Date().toDateString();if(userData.lastDaily==t){alert('Already claimed today');return}userData.lastDaily=t;userData.bal+=10;userData.earn+=10;saveUser();updateBal();alert('₹10 Added');}
+function claimInvite(){if(!userData.waConnectedAt||Date.now()-userData.waConnectedAt<24*60*60*1000){alert('Need 24h WhatsApp active');go('wa');return}if(userData.inviteClaimed){alert('Already claimed');return}userData.inviteClaimed=true;userData.bal+=100;userData.earn+=100;saveUser();updateBal();alert('₹100 Added');}
+function updateBal(){document.getElementById('bal').innerText=userData.bal.toFixed(2);document.getElementById('bal2').innerText=userData.bal.toFixed(2);document.getElementById('earn').innerText=userData.bal.toFixed(2);if(document.getElementById('wBal'))document.getElementById('wBal').innerText=userData.bal.toFixed(2);}
+function saveUser(){let all=JSON.parse(localStorage.getItem('hujaifa_users')||'{}'),cur=localStorage.getItem('hujaifa_current');if(cur){all[cur]=userData;localStorage.setItem('hujaifa_users',JSON.stringify(all))}}
+function openWithdraw(){document.getElementById('wBal').innerText=userData.bal.toFixed(2);go('withdraw');let bank=JSON.parse(localStorage.getItem('hujaifa_bank_'+localStorage.getItem('hujaifa_current'))||'null');if(bank){document.getElementById('bankSetupCard').classList.add('hidden');document.getElementById('withdrawFormCard').classList.remove('hidden');document.getElementById('savedBankInfo').innerText=bank.holderName+' | '+bank.bankName+' | ****'+bank.accNum.slice(-4)}else{document.getElementById('bankSetupCard').classList.remove('hidden');document.getElementById('withdrawFormCard').classList.add('hidden')}}
+function saveBank(){let h=document.getElementById('holderName').value.trim(),b=document.getElementById('bankName').value.trim(),a=document.getElementById('accNum').value.trim(),i=document.getElementById('ifsc').value.trim();if(!h||!b||!a||!i){alert('Fill all');return}localStorage.setItem('hujaifa_bank_'+localStorage.getItem('hujaifa_current'),JSON.stringify({holderName:h,bankName:b,accNum:a,ifsc:i}));alert('Bank Saved');openWithdraw();}
+function editBank(){document.getElementById('bankSetupCard').classList.remove('hidden');document.getElementById('withdrawFormCard').classList.add('hidden')}
+function doWithdraw(){let amt=parseFloat(document.getElementById('wAmount').value);if(!amt||amt<100){alert('Min ₹100');return}if(amt>userData.bal){alert('Insufficient');return}userData.bal-=amt;saveUser();updateBal();document.getElementById('wHistory').innerHTML=`<div style="background:#f1f5f9;padding:10px;border-radius:10px;display:flex;justify-content:space-between"><div><b>₹${amt}</b><br><small>${new Date().toLocaleString()}</small></div><div style="color:#f59e0b">Pending</div></div>`+document.getElementById('wHistory').innerHTML;alert('Withdraw ₹'+amt+' submitted');}
+let cur=localStorage.getItem('hujaifa_current');if(cur){let all=JSON.parse(localStorage.getItem('hujaifa_users')||'{}');if(all[cur]){userData=all[cur];loadApp()}}
 </script>
 </body>
 </html>
