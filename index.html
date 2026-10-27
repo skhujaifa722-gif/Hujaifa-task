@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hujaifa Task</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://sad.adsgram.ai/js/sad.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#fff;font-family:system-ui,sans-serif;padding:0}
+.center{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.authBox{background:#1e1e1e;border:1px solid #2a2a2a;border-radius:24px;padding:26px;width:100%;max-width:380px}
+.authBox h2{text-align:center;margin-bottom:6px}
+.authBox .sub{text-align:center;color:#a1a1aa;font-size:13px;margin-bottom:18px}
+.input{width:100%;padding:14px;border-radius:12px;border:1px solid #333;background:#27272a;color:#fff;margin-top:10px;font-size:15px;outline:none}
+.btn{background:#27272a;color:#fff;border:0;width:100%;padding:15px;border-radius:14px;font-size:15px;font-weight:700;cursor:pointer;margin-top:12px}
+.yellow{background:#facc15;color:#000}
+.link{color:#facc15;font-size:13px;text-align:center;margin-top:12px;cursor:pointer}
+.main{padding:16px;padding-bottom:90px;display:none}
+.card{background:#1e1e1e;border:1px solid #2a2a2a;border-radius:18px;padding:18px;margin-bottom:14px}
+.balance{font-size:32px;font-weight:800;color:#facc15;margin-top:6px}
+.sub2{color:#a1a1aa;font-size:13px;margin-top:4px}
+.small{font-size:12px;color:#71717a;margin-top:8px;text-align:center}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:99;align-items:center;justify-content:center;padding:20px}
+.modalBox{background:#1e1e1e;border-radius:20px;padding:22px;width:100%;max-width:360px;border:1px solid #333;text-align:center}
+.tapArea{width:100%;height:130px;background:#27272a;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:48px;margin:14px 0}
+.linkBox{background:#27272a;border:1px dashed #facc15;padding:14px;border-radius:12px;margin:12px 0;word-break:break-all;font-size:13px;color:#facc15}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.logout{font-size:12px;color:#ff5555;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="center" id="registerPage">
+<div class="authBox">
+<h2>📱 Register</h2>
+<div class="sub">Create account to earn money</div>
+<input class="input" id="regName" placeholder="Full Name">
+<input class="input" id="regNumber" placeholder="Mobile Number - 10 digit" type="tel">
+<input class="input" id="regPass" placeholder="Password - min 4 digit" type="password">
+<input class="input" id="regPass2" placeholder="Confirm Password" type="password">
+<button class="btn yellow" id="regBtn">✅ Register & Start</button>
+<div class="link" id="toLogin">Already have account? Login</div>
+</div>
+</div>
+<div class="center" id="loginPage" style="display:none">
+<div class="authBox">
+<h2>🔐 Login</h2>
+<div class="sub">Welcome back!</div>
+<input class="input" id="logNumber" placeholder="Mobile Number" type="tel">
+<input class="input" id="logPass" placeholder="Password" type="password">
+<button class="btn yellow" id="loginBtn">🚀 Login</button>
+<div class="link" id="toRegister">No account? Register now</div>
+</div>
+</div>
+<div class="main" id="mainPage">
+<div class="topbar"><h2 id="hiText">👋 Hi!</h2><span class="logout" id="logoutBtn">Logout</span></div>
+<div class="card"><div class="sub2">💰 Current Balance</div><div class="balance" id="b">₹20.00</div><div class="sub2">Number: <span id="userNum">-</span> | Invites: <span id="inv">0</span></div></div>
+<div class="card"><div style="font-weight:700">🎬 Earn by Watching Ads</div><button class="btn yellow" id="adBtn" style="margin-top:12px">▶️ Watch Ad +₹2</button><div class="small" id="adInfo">Loading ads...</div></div>
+<div class="card"><button class="btn" id="dailyBtn">✅ Daily Check-in +₹2</button><div class="small" id="dailyInfo"></div></div>
+<div class="card"><button class="btn" id="gameBtn">🎮 Play Game +₹5</button><div class="small">Tap 10 times</div></div>
+<div class="card"><button class="btn" id="inviteBtn">👥 Invite Friends +₹10</button><div class="small" id="inviteInfo"></div></div>
+<div class="card"><button class="btn" id="joinBtn">🎁 Join @HujaifaHS = +₹10</button><div class="small" id="joinInfo"></div></div>
+<button class="btn yellow" id="wdBtn">💰 Withdraw - Min ₹100</button>
+</div>
+<div class="modal" id="gameModal"><div class="modalBox"><h3>🎮 Tap Game</h3><div class="tapArea" id="tapArea">👆 0/10</div><div id="gameResult" class="sub2"></div><button class="btn" id="closeGame">Close</button></div></div>
+<div class="modal" id="inviteModal"><div class="modalBox"><h3>👥 Invite</h3><div class="linkBox" id="inviteLink">Generating...</div><button class="btn yellow" id="copyLink">📋 Copy Link</button><button class="btn" id="shareTG" style="margin-top:8px">✈️ Share on Telegram</button><button class="btn" id="closeInvite" style="margin-top:10px;background:#27272a">Close</button></div></div>
+<div class="modal" id="bankModal"><div class="
