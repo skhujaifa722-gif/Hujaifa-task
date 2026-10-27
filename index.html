@@ -1,68 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Hujaifa Task</title>
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-<script src="https://sad.adsgram.ai/js/sad.js"></script>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#0f0f0f;color:#fff;font-family:system-ui,sans-serif;padding:0}
-.center{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-.authBox{background:#1e1e1e;border:1px solid #2a2a2a;border-radius:24px;padding:26px;width:100%;max-width:380px}
-.authBox h2{text-align:center;margin-bottom:6px}
-.authBox .sub{text-align:center;color:#a1a1aa;font-size:13px;margin-bottom:18px}
-.input{width:100%;padding:14px;border-radius:12px;border:1px solid #333;background:#27272a;color:#fff;margin-top:10px;font-size:15px;outline:none}
-.btn{background:#27272a;color:#fff;border:0;width:100%;padding:15px;border-radius:14px;font-size:15px;font-weight:700;cursor:pointer;margin-top:12px}
-.yellow{background:#facc15;color:#000}
-.link{color:#facc15;font-size:13px;text-align:center;margin-top:12px;cursor:pointer}
-.main{padding:16px;padding-bottom:90px;display:none}
-.card{background:#1e1e1e;border:1px solid #2a2a2a;border-radius:18px;padding:18px;margin-bottom:14px}
-.balance{font-size:32px;font-weight:800;color:#facc15;margin-top:6px}
-.sub2{color:#a1a1aa;font-size:13px;margin-top:4px}
-.small{font-size:12px;color:#71717a;margin-top:8px;text-align:center}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:99;align-items:center;justify-content:center;padding:20px}
-.modalBox{background:#1e1e1e;border-radius:20px;padding:22px;width:100%;max-width:360px;border:1px solid #333;text-align:center}
-.tapArea{width:100%;height:130px;background:#27272a;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:48px;margin:14px 0}
-.linkBox{background:#27272a;border:1px dashed #facc15;padding:14px;border-radius:12px;margin:12px 0;word-break:break-all;font-size:13px;color:#facc15}
-.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.logout{font-size:12px;color:#ff5555;cursor:pointer}
-</style>
-</head>
-<body>
-<div class="center" id="registerPage">
-<div class="authBox">
-<h2>📱 Register</h2>
-<div class="sub">Create account to earn money</div>
-<input class="input" id="regName" placeholder="Full Name">
-<input class="input" id="regNumber" placeholder="Mobile Number - 10 digit" type="tel">
-<input class="input" id="regPass" placeholder="Password - min 4 digit" type="password">
-<input class="input" id="regPass2" placeholder="Confirm Password" type="password">
-<button class="btn yellow" id="regBtn">✅ Register & Start</button>
-<div class="link" id="toLogin">Already have account? Login</div>
-</div>
-</div>
-<div class="center" id="loginPage" style="display:none">
-<div class="authBox">
-<h2>🔐 Login</h2>
-<div class="sub">Welcome back!</div>
-<input class="input" id="logNumber" placeholder="Mobile Number" type="tel">
-<input class="input" id="logPass" placeholder="Password" type="password">
-<button class="btn yellow" id="loginBtn">🚀 Login</button>
-<div class="link" id="toRegister">No account? Register now</div>
-</div>
-</div>
-<div class="main" id="mainPage">
-<div class="topbar"><h2 id="hiText">👋 Hi!</h2><span class="logout" id="logoutBtn">Logout</span></div>
-<div class="card"><div class="sub2">💰 Current Balance</div><div class="balance" id="b">₹20.00</div><div class="sub2">Number: <span id="userNum">-</span> | Invites: <span id="inv">0</span></div></div>
-<div class="card"><div style="font-weight:700">🎬 Earn by Watching Ads</div><button class="btn yellow" id="adBtn" style="margin-top:12px">▶️ Watch Ad +₹2</button><div class="small" id="adInfo">Loading ads...</div></div>
-<div class="card"><button class="btn" id="dailyBtn">✅ Daily Check-in +₹2</button><div class="small" id="dailyInfo"></div></div>
-<div class="card"><button class="btn" id="gameBtn">🎮 Play Game +₹5</button><div class="small">Tap 10 times</div></div>
-<div class="card"><button class="btn" id="inviteBtn">👥 Invite Friends +₹10</button><div class="small" id="inviteInfo"></div></div>
-<div class="card"><button class="btn" id="joinBtn">🎁 Join @HujaifaHS = +₹10</button><div class="small" id="joinInfo"></div></div>
-<button class="btn yellow" id="wdBtn">💰 Withdraw - Min ₹100</button>
-</div>
-<div class="modal" id="gameModal"><div class="modalBox"><h3>🎮 Tap Game</h3><div class="tapArea" id="tapArea">👆 0/10</div><div id="gameResult" class="sub2"></div><button class="btn" id="closeGame">Close</button></div></div>
-<div class="modal" id="inviteModal"><div class="modalBox"><h3>👥 Invite</h3><div class="linkBox" id="inviteLink">Generating...</div><button class="btn yellow" id="copyLink">📋 Copy Link</button><button class="btn" id="shareTG" style="margin-top:8px">✈️ Share on Telegram</button><button class="btn" id="closeInvite" style="margin-top:10px;background:#27272a">Close</button></div></div>
-<div class="modal" id="bankModal"><div class="
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hujaifa Task</title><script src="https://telegram.org/js/telegram-web-app.js"></script><style>body{background:#0f0f0f;color:#fff;font-family:sans-serif;margin:0}.c{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px}.b{background:#1e1e1e;border:1px solid #333;border-radius:20px;padding:20px;width:100%;max-width:360px}.i{width:100%;padding:13px;border-radius:10px;border:1px solid #333;background:#27272a;color:#fff;margin-top:10px}.bt{width:100%;padding:14px;border-radius:12px;border:0;font-weight:700;margin-top:12px}.y{background:#facc15;color:#000}.g{background:#27272a;color:#fff}.lk{color:#facc15;font-size:12px;text-align:center;margin-top:10px}.otp{background:#102010;border:1px solid #2a6a2a;color:#8f8;padding:10px;border-radius:10px;margin-top:10px;font-size:13px}</style></head><body>
+<div class="c" id="rP"><div class="b"><h2 style="text-align:center">📱 Register</h2><input class="i" id="rN" placeholder="Full Name"><input class="i" id="rM" placeholder="10 digit Mobile" maxlength="10"><input class="i" id="rR" placeholder="Refer Code (Optional)"><input class="i" id="rP1" type="password" placeholder="Password"><input class="i" id="rP2" type="password" placeholder="Confirm Password"><button class="bt y" id="rB">📲 Send OTP</button><div class="lk" onclick="sh('lP')">Login</div></div></div>
+<div class="c" id="oP" style="display:none"><div class="b"><h2 style="text-align:center">🔐 OTP</h2><div id="oT" style="text-align:center;color:#888;font-size:13px"></div><div class="otp" id="oD"></div><input class="i" id="oI" placeholder="6 digit OTP" maxlength="6"><button class="bt y" id="oB">✅ Verify</button><div class="lk" onclick="sh('rP')">Back</div></div></div>
+<div class="c" id="lP" style="display:none"><div class="b"><h2 style="text-align:center">Login</h2><input class="i" id="lM" placeholder="Mobile"><input class="i" id="lP1" type="password" placeholder="Password"><button class="bt y" id="lB">Login</button><div class="lk" onclick="sh('rP')">Register</div></div></div>
+<div id="mP" style="display:none;padding:16px"><h3 id="hi"></h3><div style="background:#1e1e1e;padding:14px;border-radius:14px;margin:10px 0">Balance: <b id="bal" style="color:#facc15">₹20</b> | Code: <b id="mc" style="color:#facc15"></b> | Inv: <span id="iv">0</span></div><button class="bt y" onclick="ad()">Watch Ad +₹2</button><button class="bt g" onclick="daily()">Daily +₹2</button><button class="bt g" onclick="game()">Tap Game +₹5 (10 taps)</button><button class="bt g" onclick="invite()">Invite - My Refer Code</button><button class="bt g" onclick="join()">Join @HujaifaHS +₹10</button><button class="bt y" onclick="wd()">Withdraw ₹100</button><div style="text-align:center;margin-top:10px"><span style="color:#ff5555;font-size:12px" onclick="logout()">Logout</span></div></div>
+<script>
+let tg=null;try{tg=Telegram.WebApp;tg.ready();tg.expand()}catch(e){}
+let u=null,pend=null,otp='',bal=20,ld='',lg='',jo=false,inv=0;
+function sh(id){['rP','oP','lP','mP'].forEach(x=>document.getElementById(x).style.display='none');document.getElementById(id).style.display=id=='mP'?'block':'flex'}
+function vN(n){return /^[6-9][0-9]{9}$/.test(n)}
+function gO(){return Math.floor(100000+Math.random()*900000)+' '}
+function gC(m){return 'HJ'+m.slice(-4)+Math.floor(10+Math.random()*90)}
+try{u=JSON.parse(localStorage.getItem('hu_u')||'null')}catch(e){}
+if(u&&u.lg){init();sh('mP')}else if(u){sh('lP')}else{sh('rP')}
+document.getElementById('rB').onclick=()=>{let n=document.getElementById('rN').value.trim(),m=document.getElementById('rM').value.trim(),r=document.getElementById('rR').value.trim().toUpperCase(),p1=document.getElementById('rP1').value.trim(),p2=document.getElementById('rP2').value.trim();if(n.length<2){alert('Name');return}if(!vN(m)){alert('10 digit number 6-9 start');return}if(p1.length<4){alert('Pass 4+');return}if(p1!=p2){alert('Pass mismatch');return}otp=(Math.floor(100000+Math.random()*900000)).toString();pend={n:n,m:m,r:r,p:p1};document.getElementById('oT').innerText='OTP to +91 '+m;document.getElementById('oD').innerHTML='DEMO OTP: <b style=color:#facc15;font-size:20px>'+otp+'</b><br>Real SMS need Fast2SMS';sh('oP')};
+document.getElementById('oB').onclick=()=>{let e=document.getElementById('oI').value.trim();if(e!=otp){alert('Wrong OTP '+otp);return}let code=gC(pend.m);u={name:pend.n,number:pend.m,code:code,used:pend.r,pass:pend.p,lg:true};localStorage.setItem('hu_u',JSON.stringify(u));localStorage.setItem('hu_b_'+u.number,'20');if(pend.r)alert('Refer '+pend.r+' ok');init();sh('mP')};
+document.getElementById('lB').onclick=()=>{let m=document.getElementById('lM').value.trim(),p=document.getElementById('lP1').value.trim();try{u=JSON.parse(localStorage.getItem('hu_u')||'null')}catch(e){}if(u&&u.number==m&&u.pass==p){u.lg=true;localStorage.setItem('hu_u',JSON.stringify(u));init();sh('mP')}else alert('Wrong')};
+function init(){try{bal=parseInt(localStorage.getItem('hu_b_'+u.number)||'20')}catch(e){}try{ld=localStorage.getItem('hu_d_'+u.number)||''}catch(e){}try{lg=localStorage.getItem('hu_g_'+u.number)||''}catch(e){}try{jo=localStorage.getItem('hu_j_'+u.number)=='y'}catch(e){}try{inv=parseInt(localStorage.getItem('hu_i_'+u.number)||'0')}catch(e){}document.getElementById('hi').innerText='Hi '+u.name;document.getElementById('mc').innerText=u.code;document.getElementById('bal').innerText='₹'+bal;document.getElementById('iv').innerText=inv}
+function add(n){bal+=n;localStorage.setItem('hu_b_'+u.number,bal);document.getElementById('bal').innerText='₹'+bal;alert('+₹'+n)}
+function daily(){let t=new Date().toDateString();if(ld==t){alert('Done');return}ld=t;localStorage.setItem('hu_d_'+u.number,t);add(2)}
+function game(){let t=new Date().toDateString();if(lg==t){alert('Played today');return}let c=0;let taps=prompt('Tap Game: 10 লিখে OK চাপো 10 বার (Demo tap) - কত বার ট্যাপ করবে? 10 লেখো');if(taps=='10'){lg=t;localStorage.setItem('hu_g_'+u.number,t);add(5)}else alert('10 লেখো')}
+function invite(){let link='https://t.me/HujaifaTaskBot?start=ref_'+u.code;prompt('Your Refer Code: '+u.code+'\nLink:',link);inv++;localStorage.setItem('hu_i_'+u.number,inv);document.getElementById('iv').innerText=inv;if(inv<=3)add(10)}
+function join(){if(jo){alert('Done');return}window.open('https://t.me/HujaifaHS','_blank');setTimeout(()=>{if(confirm('Joined?')){jo=true;localStorage.setItem('hu_j_'+u.number,'y');add(10)}},1000)}
+function wd(){if(bal<100){alert('Min 100, have '+bal);return}let upi=prompt('UPI ID:');if(upi){alert('Withdraw ₹'+bal+' to '+upi);bal=0;localStorage.setItem('hu_b_'+u.number,bal);document.getElementById('bal').innerText='₹'+bal}}
+function logout(){if(confirm('Logout?')){u.lg=false;localStorage.setItem('hu_u',JSON.stringify(u));sh('lP')}}
+function ad(){if(window.Adsgram){try{let A=window.Adsgram.init({blockId:'int-56246'});A.show().then(r=>{if(r.done)add(2)})}catch(e){add(1)}}else add(1)}
+</script></body></html>
