@@ -1,82 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PAIZVA - Zero Balance</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>HUJAIFA - Official</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui}
-body{background:#f1f3fd;padding-bottom:80px}
-.top{padding:12px;display:flex;justify-content:space-between}
-.pill{background:#fff;padding:8px 14px;border-radius:20px;font-size:14px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.card{background:#fff;margin:16px;border-radius:20px;padding:16px;box-shadow:0 8px 24px rgba(0,0,0,.05)}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui; -webkit-tap-highlight-color: transparent;}
+body{background:#f1f3fd;padding-bottom:90px;touch-action: manipulation;}
+.top{padding:12px;display:flex;justify-content:space-between;position:relative;z-index:10}
+.pill{background:#fff;padding:9px 15px;border-radius:20px;font-size:14px;box-shadow:0 2px 8px rgba(0,0,0,.08);color:#0f172a;font-weight:600;display:flex;align-items:center;gap:6px}
+.card{background:#fff;margin:14px;border-radius:20px;padding:16px;box-shadow:0 8px 24px rgba(0,0,0,.05);position:relative;z-index:2}
 .tabs{display:flex;background:#e8ecff;border-radius:14px;padding:4px}
 .tabs div{flex:1;text-align:center;padding:10px;border-radius:12px;font-weight:600;cursor:pointer}
 .tabs .active{background:#fff;color:#1e40af}
-.input{background:#f1f5f9;border-radius:14px;padding:14px;display:flex;gap:10px;margin-top:12px}
-.input input{border:0;background:transparent;outline:0;width:100%}
-.btn{width:100%;background:linear-gradient(90deg,#1e5bd7,#3b82f6);color:#fff;border:0;padding:16px;border-radius:28px;font-weight:700;margin-top:16px;font-size:17px}
-.balance{background:linear-gradient(135deg,#1e5bd7,#2a7de1);color:#fff;border-radius:22px;padding:20px;margin:16px}
-.balance h1{font-size:36px;margin-top:6px}
-.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:10px 0;border-top:1px solid #e2e8f0}
-.nav div{text-align:center;color:#64748b;font-size:12px}
-.nav .active{color:#1e5bd7;font-weight:700}
-.hidden{display:none}
-.whiteBtn{background:#fff;color:#1e5bd7;border:0;padding:12px 24px;border-radius:24px;font-weight:700}
-.invite{background:#f1f5f9;border-radius:14px;padding:14px;display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+.input{background:#f1f5f9;border-radius:14px;padding:14px;display:flex;gap:10px;margin-top:12px;align-items:center}
+.input input{border:0;background:transparent;outline:0;width:100%;font-size:15px}
+.btn{width:100%;background:#1e5bd7;color:#fff;border:0;padding:15px;border-radius:28px;font-weight:700;margin-top:16px;font-size:17px;cursor:pointer}
+.btn:active{transform:scale(0.98)}
+.balance{background:linear-gradient(135deg,#1e5bd7,#2a7de1);color:#fff;border-radius:22px;padding:20px;margin:14px}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:12px 0;border-top:1px solid #e2e8f0;z-index:9999}
+.nav div{text-align:center;color:#64748b;font-size:12px;cursor:pointer;padding:6px 16px;border-radius:14px}
+.nav .active{color:#1e5bd7;font-weight:800;background:#eef2ff}
+.hidden{display:none !important}
+.page{padding:6px; min-height:80vh}
+.clickBox{background:#fff;padding:16px;border-radius:16px;margin:12px 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.clickBox:active{background:#f1f5f9}
 </style>
 </head>
 <body>
 
 <div id="loginPage">
-  <div class="top"><div class="pill">🎧 Support</div><div class="pill">🌐 English ▼</div></div>
+  <div class="top">
+    <a href="https://t.me/Hujaifasupport" target="_blank" style="text-decoration:none"><div class="pill">🎧 24/7 Support</div></a>
+    <div class="pill">🌐 English ▼</div>
+  </div>
   <div style="text-align:center;margin-top:10px">
-    <div style="width:90px;height:90px;background:linear-gradient(135deg,#4facfe,#1e5bd7);border-radius:22px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:50px;font-weight:800;margin:0 auto">P</div>
-    <h1 style="margin-top:10px">Welcome to PAIZVA</h1>
-    <p style="color:#64748b;font-size:14px;margin-top:4px">Connect WhatsApp and explore daily rewards</p>
+    <div style="width:90px;height:90px;background:linear-gradient(135deg,#ff7a18,#ff3c00);border-radius:22px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:50px;font-weight:800;margin:0 auto">H</div>
+    <h1 style="margin-top:10px">Welcome to HUJAIFA</h1>
+    <p style="color:#64748b;font-size:14px;margin-top:4px">Zero Balance Account</p>
   </div>
   <div class="card">
-    <div class="tabs"><div class="active" id="tabL" onclick="showL()">Login</div><div id="tabC" onclick="showC()">Create account</div></div>
-    <div class="input"><span>📱</span><b>+91 |</b><input id="ph" placeholder="Phone number"></div>
-    <div class="input"><span>🔒</span><input id="ps" type="password" placeholder="Login password"></div>
-    <div class="input hidden" id="cps"><span>🔒</span><input placeholder="Confirm login password"></div>
-    <button class="btn" id="mainBtn" onclick="go()">Login</button>
+    <div class="tabs"><div class="active" id="tL" onclick="showLogin()">Login</div><div id="tC" onclick="showCreate()">Create account</div></div>
+    <div class="input"><b>+91 |</b><input id="phone" placeholder="Phone number" type="number"></div>
+    <div class="input"><span>🔒</span><input id="pass" type="password" placeholder="Password"></div>
+    <div class="input hidden" id="cpassBox"><span>🔒</span><input id="cpass" type="password" placeholder="Confirm password"></div>
+    <button class="btn" id="actionBtn" onclick="handleAuth()">Login</button>
+    <p id="msg" style="text-align:center;color:red;margin-top:12px;font-size:14px;font-weight:600"></p>
   </div>
 </div>
 
-<div id="mePage" class="hidden">
+<div id="homePage" class="hidden page">
+  <h2 style="padding:10px">🏠 Home - HUJAIFA</h2>
+  <div class="clickBox" onclick="openPage('tasks')"><div><b>📋 Daily Tasks</b><br><small>Earn ₹10 daily</small></div><div>›</div></div>
+  <div class="clickBox" onclick="alert('WhatsApp Task Coming Soon')"><div><b>💬 WhatsApp Task</b><br><small>₹50.00 per task</small></div><div>›</div></div>
+  <div class="clickBox" onclick="openPage('me')"><div><b>💰 Check Balance</b><br><small>Your earnings</small></div><div>›</div></div>
+</div>
+
+<div id="tasksPage" class="hidden page">
+  <h2 style="padding:10px">📋 Tasks</h2>
+  <div class="card">
+    <h3>Daily Check-in</h3><p style="color:#64748b;margin-top:6px">Click to claim ₹10</p>
+    <button class="btn" onclick="addBal(10)">Claim ₹10 Now</button>
+  </div>
+  <div class="card">
+    <h3>Invite 1 Friend</h3><p style="color:#64748b;margin-top:6px">Reward ₹100</p>
+    <button class="btn" style="background:#10b981" onclick="addBal(100)">Claim ₹100</button>
+  </div>
+</div>
+
+<div id="waPage" class="hidden page">
+  <h2 style="padding:10px">WhatsApp</h2>
+  <div class="card"><p>Connect WhatsApp to earn</p><br><button class="btn" onclick="alert('Connected! Demo')">Connect Now</button></div>
+</div>
+
+<div id="mePage" class="hidden page">
   <div class="balance">
     <p>Account Balance</p>
     <h1>₹<span id="bal">0.00</span></h1><br>
-    <button class="whiteBtn">📁 Withdraw</button><br><br>
-    <button style="background:rgba(255,255,255,.2);color:#fff;border:0;padding:8px 16px;border-radius:20px">↻ History</button>
+    <button style="background:#fff;color:#1e5bd7;border:0;padding:12px 24px;border-radius:24px;font-weight:700" onclick="alert('Minimum withdraw ₹100')">📁 Withdraw</button>
+    <button style="background:rgba(255,255,255,.25);color:#fff;border:0;padding:10px 18px;border-radius:20px;margin-left:10px" onclick="alert('No history yet')">↻ History</button>
   </div>
-  <div class="card">
-    <h3>☘ Invite & earn</h3><p style="color:#64748b;font-size:13px">Each activated friend generates a reward</p>
-    <div class="invite"><div><small>Invitation Code</small><h2>EZ655X</h2></div><button style="background:#1e5bd7;color:#fff;border:0;padding:10px 18px;border-radius:20px">Copy</button></div>
-    <div style="margin-top:12px;background:#eef2ff;padding:12px;border-radius:12px;color:#1e5bd7;font-weight:600">Invitation Task ›</div>
-  </div>
-  <div class="card"><p>📦 Income Details</p></div>
-  <div class="card">
-    <div style="padding:12px;border-bottom:1px solid #eee">📧 Important Messages ›</div>
-    <div style="padding:12px;border-bottom:1px solid #eee">👥 My Team ›</div>
-    <div style="padding:12px">🔒 Change Password ›</div>
-  </div>
-  <div class="card"><p style="text-align:center;color:#b91c1c;font-weight:700" onclick="location.reload()">Logout</p></div>
+  <div class="clickBox" onclick="copyCode()"><div>Your Invite Code<br><b id="myCode">HJ0000</b></div><div style="background:#1e5bd7;color:#fff;padding:8px 16px;border-radius:20px">Copy</div></div>
+  <div class="clickBox" onclick="alert('Income Details - Coming Soon')"><div>📦 Income Details</div><div>›</div></div>
+  <div class="clickBox" onclick="alert('My Team - Coming Soon')"><div>👥 My Team</div><div>›</div></div>
+  <div class="clickBox" onclick="logout()"><div style="color:red;font-weight:700">🚪 Logout</div><div>›</div></div>
 </div>
 
-<div class="nav"><div>⊞<br>Home</div><div>◍<br>Tasks</div><div>📱<br>WhatsApp</div><div class="active">👤<br>Me</div></div>
+<div class="nav">
+  <div id="navHome" onclick="openPage('home')"><div style="font-size:18px">⊞</div>Home</div>
+  <div id="navTasks" onclick="openPage('tasks')"><div style="font-size:18px">◎</div>Tasks</div>
+  <div id="navWa" onclick="openPage('wa')"><div style="font-size:18px">📱</div>WA</div>
+  <div id="navMe" class="active" onclick="openPage('me')"><div style="font-size:18px">👤</div>Me</div>
+</div>
 
 <script>
-function showC(){document.getElementById('tabC').classList.add('active');document.getElementById('tabL').classList.remove('active');document.getElementById('cps').classList.remove('hidden');document.getElementById('mainBtn').innerText='Create account';}
-function showL(){document.getElementById('tabL').classList.add('active');document.getElementById('tabC').classList.remove('active');document.getElementById('cps').classList.add('hidden');document.getElementById('mainBtn').innerText='Login';}
-function go(){
- if(!document.getElementById('ph').value){alert('Phone number দাও');return;}
- // প্রথমবার Zero Balance
- document.getElementById('bal').innerText='0.00';
- localStorage.setItem('paizva_bal','0.00');
- document.getElementById('loginPage').classList.add('hidden');
- document.getElementById('mePage').classList.remove('hidden');
+let mode='login';
+function showCreate(){mode='create';document.getElementById('tC').classList.add('active');document.getElementById('tL').classList.remove('active');document.getElementById('cpassBox').classList.remove('hidden');document.getElementById('actionBtn').innerText='Create account';}
+function showLogin(){mode='login';document.getElementById('tL').classList.add('active');document.getElementById('tC').classList.remove('active');document.getElementById('cpassBox').classList.add('hidden');document.getElementById('actionBtn').innerText='Login';}
+function handleAuth(){
+  const ph=document.getElementById('phone').value.trim();
+  const ps=document.getElementById('pass').value.trim();
+  const cps=document.getElementById('cpass').value.trim();
+  const msg=document.getElementById('msg');
+  if(!ph || !ps){msg.innerText='নাম্বার আর পাসওয়ার্ড দাও';return;}
+  let users=JSON.parse(localStorage.getItem('hujaifa_users')||'{}');
+  if(mode==='create'){
+    if(ps!==cps){msg.innerText='Password মিলছে না';return;}
+    if(users[ph]){msg.innerText='একাউন্ট আছে, Login করো';return;}
+    users[ph]={pass:ps,bal:0,code:'HJ'+ph.slice(-4)+Math.floor(Math.random()*90+10)};
+    localStorage.setItem('hujaifa_users',JSON.stringify(users));
+    msg.style.color='green';msg.innerText='Account Created! এখন Login করো';showLogin();return;
+  }else{
+    if(!users[ph]){msg.innerText='এই নাম্বারে একাউন্ট নেই';return;}
+    if(users[ph].pass!==ps){msg.innerText='পাসওয়ার্ড ভুল!';return;}
+    localStorage.setItem('hujaifa_current',ph);
+    document.getElementById('bal').innerText=Number(users[ph].bal).toFixed(2);
+    document.getElementById('myCode').innerText=users[ph].code;
+    document.getElementById('loginPage').classList.add('hidden');
+    openPage('me');
+  }
 }
+function openPage(p){
+  ['home','tasks','wa','me'].forEach(x=>{
+    let pg=document.getElementById(x+'Page'); if(pg) pg.classList.add('hidden');
+    let nv=document.getElementById('nav'+x.charAt(0).toUpperCase()+x.slice(1)); if(nv) nv.classList.remove('active');
+  });
+  document.getElementById(p+'Page').classList.remove('hidden');
+  document.getElementById('nav'+p.charAt(0).toUpperCase()+p.slice(1)).classList.add('active');
+  window.scrollTo(0,0);
+}
+function addBal(n){
+  let ph=localStorage.getItem('hujaifa_current');
+  let users=JSON.parse(localStorage.getItem('hujaifa_users'));
+  users[ph].bal+=n; localStorage.setItem('hujaifa_users',JSON.stringify(users));
+  document.getElementById('bal').innerText=users[ph].bal.toFixed(2);
+  alert('₹'+n+' Added to balance!');
+}
+function logout(){localStorage.removeItem('hujaifa_current');location.reload();}
+function copyCode(){navigator.clipboard.writeText(document.getElementById('myCode').innerText);alert('Code Copied!');}
 </script>
 </body>
 </html>
