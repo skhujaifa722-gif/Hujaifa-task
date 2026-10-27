@@ -3,104 +3,115 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hujaifa Task - Earn Money</title>
+<title>Hujaifa Task</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="https://sad.adsgram.ai/js/sad.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0f0f0f;color:#fff;font-family:system-ui,sans-serif;padding:16px;padding-bottom:80px}
-h2{margin:10px 0 20px 0}
+body{background:#0f0f0f;color:#fff;font-family:system-ui,sans-serif;padding:16px;padding-bottom:90px}
+h2{margin:10px 0 18px}
 .card{background:#1e1e1e;border:1px solid #2a2a2a;border-radius:18px;padding:18px;margin-bottom:14px}
-.balance{font-size:26px;font-weight:800;color:#facc15;margin-top:8px}
-.sub{color:#a1a1aa;font-size:14px;margin-top:4px}
-.btn{background:#27272a;color:#fff;border:0;width:100%;padding:16px;border-radius:14px;font-size:16px;font-weight:600;margin-top:12px;cursor:pointer}
-.btn:active{transform:scale(0.98)}
-.btn:disabled{opacity:0.5}
+.balance{font-size:30px;font-weight:800;color:#facc15;margin-top:6px}
+.sub{color:#a1a1aa;font-size:13px;margin-top:4px}
+.btn{background:#27272a;color:#fff;border:0;width:100%;padding:16px;border-radius:14px;font-size:15px;font-weight:700;cursor:pointer}
+.btn:disabled{opacity:.5}
 .yellow{background:#facc15;color:#000}
-.icon{margin-right:6px}
+.small{font-size:12px;color:#71717a;margin-top:8px;text-align:center}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:99;align-items:center;justify-content:center;padding:20px}
+.modalBox{background:#1e1e1e;border-radius:20px;padding:22px;width:100%;max-width:360px;border:1px solid #333}
+.tapArea{width:100%;height:120px;background:#27272a;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:44px;margin:14px 0}
+.input{width:100%;padding:14px;border-radius:12px;border:1px solid #333;background:#27272a;color:#fff;margin-top:10px;font-size:14px}
+.label{font-size:13px;color:#a1a1aa;margin-top:12px;display:block;text-align:left}
 </style>
 </head>
 <body>
-<h2>👋 Hi, <span id="u">User</span>!</h2>
-
+<h2>👋 Hi, <span id="u">Hujaifa</span>!</h2>
 <div class="card">
 <div class="sub">💰 Current Balance</div>
 <div class="balance" id="b">₹20.00</div>
-<div class="sub" style="margin-top:10px">⚡ Energy: 1000/1000</div>
+<div class="sub">Invites: <span id="inv">0</span></div>
 </div>
-
 <div class="card">
 <div style="font-weight:700">🎬 Earn by Watching Ads</div>
-<div class="sub">Watch full ad and earn instantly</div>
-<button class="btn yellow" id="adBtn" onclick="showAd()">▶️ Watch Ad +₹2</button>
+<button class="btn yellow" id="adBtn" onclick="showAd()" style="margin-top:12px">▶️ Watch Ad +₹2</button>
+<div class="small" id="adInfo">Loading ads...</div>
 </div>
+<div class="card"><button class="btn" onclick="dailyCheck()">✅ Daily Check-in +₹2</button><div class="small" id="dailyInfo"></div></div>
+<div class="card"><button class="btn" onclick="openGame()">🎮 Play Game +₹5</button><div class="small">Tap 10 times to win</div></div>
+<div class="card"><button class="btn" onclick="inviteFriend()">👥 Invite Friends +₹10</button><div class="small" id="inviteInfo"></div></div>
+<div class="card"><button class="btn" onclick="joinChannel()">🎁 Join @HujaifaHS = +₹10</button><div class="small" id="joinInfo"></div></div>
+<button class="btn yellow" onclick="handleWithdraw()">💰 Withdraw - Min ₹100</button>
 
-<button class="btn" onclick="add(2)">✅ Daily Check-in +₹2</button>
-<button class="btn" onclick="add(5)">🎮 Play Game +₹5</button>
-<button class="btn" onclick="add(10)">👥 Invite Friends +₹10</button>
+<!-- Game Modal -->
+<div class="modal" id="gameModal"><div class="modalBox">
+<h3>🎮 Tap Game</h3><div class="sub">Tap 10 times in 5 seconds!</div>
+<div class="tapArea" id="tapArea" onclick="tap()">👆 0/10</div><div id="gameResult" class="sub"></div>
+<button class="btn" onclick="closeGame()" style="margin-top:10px">Close</button>
+</div></div>
 
-<div class="card" style="margin-top:14px">
-🎁 <b>Bonus:</b> Join @HujaifaHS = +₹10
-</div>
-
-<button class="btn yellow" onclick="withdraw()">💰 Withdraw</button>
+<!-- Bank Modal -->
+<div class="modal" id="bankModal"><div class="modalBox">
+<h3>🏦 Add Bank / UPI</h3><div class="sub">For withdraw you must add payout method</div>
+<label class="label">Full Name</label><input class="input" id="bankName" placeholder="Ex: Hujaifa Hossain">
+<label class="label">UPI ID / PhonePe / GPay</label><input class="input" id="bankUpi" placeholder="Ex: 9876543210@upi or hujaifa@okaxis">
+<label class="label">Bank Name (Optional)</label><input class="input" id="bankBank" placeholder="Ex: SBI, HDFC">
+<div class="small" style="margin-top:12px">⚠️ Double check UPI, wrong UPI = payment failed</div>
+<button class="btn yellow" onclick="saveBank()" style="margin-top:14px">💾 Save & Withdraw</button>
+<button class="btn" onclick="closeBank()" style="margin-top:8px;background:#1e1e1e">Cancel</button>
+</div></div>
 
 <script>
-let bal = parseInt(localStorage.getItem('hujaifa_bal') || '20');
-let tg = window.Telegram ? window.Telegram.WebApp : null;
-if(tg){ tg.ready(); tg.expand(); try{document.getElementById('u').innerText = tg.initDataUnsafe.user.first_name;}catch(e){} }
+let tg=window.Telegram?window.Telegram.WebApp:null;
+if(tg){tg.ready();tg.expand();try{document.getElementById('u').innerText=tg.initDataUnsafe.user.first_name;}catch(e){}}
+let bal=parseInt(localStorage.getItem('hujaifa_bal')||'20');
+let lastDaily=localStorage.getItem('hujaifa_daily')||'';
+let joined=localStorage.getItem('hujaifa_joined')==='yes';
+let invites=parseInt(localStorage.getItem('hujaifa_inv')||'0');
+let lastGame=localStorage.getItem('hujaifa_game')||'';
+let bankData=JSON.parse(localStorage.getItem('hujaifa_bank')||'null');
 
-document.getElementById('b').innerText = '₹' + bal + '.00';
-
-function updateBal(){
-  document.getElementById('b').innerText = '₹' + bal + '.00';
-  localStorage.setItem('hujaifa_bal', bal);
-  if(tg){ try{tg.HapticFeedback.notificationOccurred('success');}catch(e){} }
+function save(){localStorage.setItem('hujaifa_bal',bal);document.getElementById('b').innerText='₹'+bal+'.00';document.getElementById('inv').innerText=invites;}
+save(); updateInfos();
+function updateInfos(){
+ let today=new Date().toDateString();
+ document.getElementById('dailyInfo').innerText= lastDaily===today ? '✅ Today claimed - Come tomorrow' : '🕒 Available today';
+ document.getElementById('joinInfo').innerText= joined ? '✅ Already claimed ₹10' : 'Click to join & verify';
+ document.getElementById('inviteInfo').innerText= 'Total invites: '+invites;
 }
-function add(n){
-  bal += n;
-  updateBal();
-  alert('✅ +₹' + n + ' Added! New Balance: ₹' + bal);
+function add(n){bal+=n;save();if(tg)try{tg.HapticFeedback.notificationOccurred('success')}catch(e){}}
+function dailyCheck(){
+ let today=new Date().toDateString();
+ if(lastDaily===today){alert('❌ Already claimed today!');return;}
+ lastDaily=today; localStorage.setItem('hujaifa_daily',today); add(2); updateInfos(); alert('✅ Daily +₹2 Added!');
 }
-function withdraw(){
-  if(bal < 100){ alert('❌ Minimum Withdraw ₹100. Your Balance: ₹' + bal + '\nInvite friends to earn more!'); }
-  else{ alert('✅ Withdraw Request Sent! ₹' + bal); }
+let taps=0,timer=null,gameActive=false;
+function openGame(){
+ let today=new Date().toDateString();
+ if(lastGame===today){alert('❌ Already played today!');return;}
+ document.getElementById('gameModal').style.display='flex'; taps=0; gameActive=true;
+ document.getElementById('tapArea').innerText='👆 0/10'; document.getElementById('gameResult').innerText='Tap fast!';
+ clearTimeout(timer); timer=setTimeout(()=>{if(gameActive&&taps<10){document.getElementById('gameResult').innerText='❌ Too slow!'; gameActive=false;}},5000);
+}
+function tap(){if(!gameActive)return; taps++; document.getElementById('tapArea').innerText='👆 '+taps+'/10'; if(taps>=10){gameActive=false; clearTimeout(timer); document.getElementById('gameResult').innerText='🎉 You Win! +₹5'; lastGame=new Date().toDateString(); localStorage.setItem('hujaifa_game',lastGame); add(5); setTimeout(closeGame,1500);}}
+function closeGame(){document.getElementById('gameModal').style.display='none'; clearTimeout(timer); gameActive=false;}
+function inviteFriend(){
+ let link='https://t.me/TaskEarnBot?start=ref_'+(tg&&tg.initDataUnsafe.user?tg.initDataUnsafe.user.id:'12345');
+ if(navigator.clipboard)navigator.clipboard.writeText(link);
+ invites++; localStorage.setItem('hujaifa_inv',invites);
+ if(invites<=3){add(10); alert('🔗 Link Copied:\n'+link+'\n\n✅ +₹10 Added!');} else alert('🔗 Link Copied:\n'+link+'\nDaily limit 3 reached');
+ save(); updateInfos();
+}
+function joinChannel(){
+ if(joined){alert('✅ Already claimed');return;}
+ let ch='https://t.me/HujaifaHS'; if(tg)tg.openTelegramLink(ch); else window.open(ch,'_blank');
+ setTimeout(()=>{if(confirm('Did you join @HujaifaHS ?\nOK = Verify & Get ₹10')){joined=true; localStorage.setItem('hujaifa_joined','yes'); add(10); updateInfos(); alert('✅ +₹10 Added');}},2000);
 }
 
-// Adsgram - Your Real ID
-const AdController = window.Adsgram ? window.Adsgram.init({ blockId: "int-56246" }) : null;
-
-function showAd(){
-  const btn = document.getElementById('adBtn');
-  if(!AdController){
-    alert('❌ Adsgram not loaded. Check internet & refresh.');
-    return;
-  }
-  btn.innerText = "⏳ Loading Ad...";
-  btn.disabled = true;
-
-  AdController.show().then((result)=>{
-    btn.innerText = "▶️ Watch Ad +₹2";
-    btn.disabled = false;
-    if(result && result.done){
-      bal += 2;
-      updateBal();
-      alert('🎉 Ad Complete! +₹2 Added. Balance: ₹' + bal);
-    } else {
-      alert('⚠️ Please watch full ad to get reward');
-    }
-  }).catch((err)=>{
-    btn.innerText = "▶️ Watch Ad +₹2";
-    btn.disabled = false;
-    console.log("Ad Error:", err);
-    let msg = err && (err.error || err.description) ? (err.error + " - " + err.description) : JSON.stringify(err);
-    if(msg.includes("No ads") || msg.includes("not found") || msg.includes("empty")){
-      alert('⏳ Adsgram: No ads available now.\n\nYour block is new (Created Today). It takes 1-2 hours for ads to start.\nPlease try after 1 hour.');
-    } else {
-      alert('Ad Error: ' + msg);
-    }
-  });
-}
-</script>
-</body>
-</html>
+// WITHDRAW WITH BANK
+function handleWithdraw(){
+ if(bal<100){alert('❌ Minimum Withdraw ₹100\nYour Balance: ₹'+bal+'\nKeep earning!'); return;}
+ if(!bankData){
+   document.getElementById('bankModal').style.display='flex';
+   return;
+ }
+ if(confirm('Withdraw
